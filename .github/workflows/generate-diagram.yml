@@ -9,9 +9,9 @@ jobs:
   plantuml:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3  # Utiliser la version v3 compatible Node 16/20
     - name: Setup Java
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v3  # Utiliser la version v3 compatible Node 16/20
       with:
         java-version: '11'
     - name: Install PlantUML
@@ -24,4 +24,7 @@ jobs:
         git config --global user.email 'actions@github.com'
         git add docs/esp32.svg
         git commit -m "Updated UML diagram"
-        git push
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.6.0  # Utiliser une action pour pousser les changements
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
