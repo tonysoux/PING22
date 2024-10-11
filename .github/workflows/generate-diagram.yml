@@ -3,21 +3,26 @@ name: Generate UML Diagrams
 on:
   push:
     paths:
-      - 'docs/*.puml'  # Déclencher l'action sur modification des fichiers .puml
+      - 'docs/*.puml'
+      - 'docs/plantUmlBuilder.py'  # Déclencher le workflow sur les modifications du script
 
 jobs:
   plantuml:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3  # Utiliser la version v3 compatible Node 16/20
-    - name: Setup Java
-      uses: actions/setup-java@v1  # Utiliser la version v3 compatible Node 16/20
+    - uses: actions/checkout@v3
+    - name: Setup Python
+      uses: actions/setup-python@v4
       with:
-        java-version: '11'
+        python-version: '3.x'
+    - name: Install dependencies
+      run: pip install -r requirements.txt  # Installer les dépendances
+    - name: Run PlantUML Builder
+      run: python docs/plantUmlBuilder.py  # Exécuter le script Python
     - name: Install PlantUML
       run: sudo apt-get install plantuml
     - name: Generate UML Diagrams
-      run: plantuml docs/esp32.puml -tsvg
+      run: plantuml docs/esp32.puml -tsvg  # Générer l'image .svg
     - name: Commit UML Diagram
       run: |
         git config --global user.name 'github-actions'
@@ -25,6 +30,7 @@ jobs:
         git add docs/esp32.svg
         git commit -m "Updated UML diagram"
     - name: Push changes
-      uses: ad-m/github-push-action@v0.6.0  # Utiliser une action pour pousser les changements
+      uses: ad-m/github-push-action@v0.6.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref_name }}
