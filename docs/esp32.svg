@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="487px" preserveAspectRatio="none" style="width:1230px;height:487px;" version="1.1" viewBox="0 0 1230 487" width="1230px" zoomAndPan="magnify"><defs><filter height="300%" id="fswee8ym4k8z3" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[3d0023649c2f8d242a0aff43ad3446f1]
+class BeamSwitchDetector--><rect fill="#FEFECE" filter="url(#fswee8ym4k8z3)" height="73.6094" id="BeamSwitchDetector" style="stroke: #A80036; stroke-width: 1.5;" width="382" x="6" y="403"/><ellipse cx="127.75" cy="419" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M130.7188,424.6406 Q130.1406,424.9375 129.5,425.0781 Q128.8594,425.2344 128.1563,425.2344 Q125.6563,425.2344 124.3281,423.5938 Q123.0156,421.9375 123.0156,418.8125 Q123.0156,415.6875 124.3281,414.0313 Q125.6563,412.375 128.1563,412.375 Q128.8594,412.375 129.5,412.5313 Q130.1563,412.6875 130.7188,412.9844 L130.7188,415.7031 Q130.0938,415.125 129.5,414.8594 Q128.9063,414.5781 128.2813,414.5781 Q126.9375,414.5781 126.25,415.6563 Q125.5625,416.7188 125.5625,418.8125 Q125.5625,420.9063 126.25,421.9844 Q126.9375,423.0469 128.2813,423.0469 Q128.9063,423.0469 129.5,422.7813 Q130.0938,422.5 130.7188,421.9219 L130.7188,424.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="130" x="148.25" y="423.1543">BeamSwitchDetector</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="387" y1="435" y2="435"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="387" y1="443" y2="443"/><ellipse cx="17" cy="454" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="356" x="26" y="457.2104">BeamSwitchDetector(int beamSwitchTPin, int beamSwitchRPin)</text><ellipse cx="17" cy="466.8047" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="135" x="26" y="470.0151">~BeamSwitchDetector()</text><!--MD5=[0ce16f4c3d7cb0b09c708de0157594c0]
+class LinearActuator--><rect fill="#FEFECE" filter="url(#fswee8ym4k8z3)" height="73.6094" id="LinearActuator" style="stroke: #A80036; stroke-width: 1.5;" width="288" x="423" y="403"/><ellipse cx="516.75" cy="419" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M519.7188,424.6406 Q519.1406,424.9375 518.5,425.0781 Q517.8594,425.2344 517.1563,425.2344 Q514.6563,425.2344 513.3281,423.5938 Q512.0156,421.9375 512.0156,418.8125 Q512.0156,415.6875 513.3281,414.0313 Q514.6563,412.375 517.1563,412.375 Q517.8594,412.375 518.5,412.5313 Q519.1563,412.6875 519.7188,412.9844 L519.7188,415.7031 Q519.0938,415.125 518.5,414.8594 Q517.9063,414.5781 517.2813,414.5781 Q515.9375,414.5781 515.25,415.6563 Q514.5625,416.7188 514.5625,418.8125 Q514.5625,420.9063 515.25,421.9844 Q515.9375,423.0469 517.2813,423.0469 Q517.9063,423.0469 518.5,422.7813 Q519.0938,422.5 519.7188,421.9219 L519.7188,424.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="92" x="537.25" y="423.1543">LinearActuator</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="424" x2="710" y1="435" y2="435"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="424" x2="710" y1="443" y2="443"/><ellipse cx="434" cy="454" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="262" x="443" y="457.2104">LinearActuator(int stepPin, int dirPin, int rxPin)</text><ellipse cx="434" cy="466.8047" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="99" x="443" y="470.0151">~LinearActuator()</text><!--MD5=[31b2194eebf44df4ffa280c9796f03c1]
+class PING--><rect fill="#FEFECE" filter="url(#fswee8ym4k8z3)" height="163.2422" id="PING" style="stroke: #A80036; stroke-width: 1.5;" width="294" x="663" y="8"/><ellipse cx="791.25" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M794.2188,29.6406 Q793.6406,29.9375 793,30.0781 Q792.3594,30.2344 791.6563,30.2344 Q789.1563,30.2344 787.8281,28.5938 Q786.5156,26.9375 786.5156,23.8125 Q786.5156,20.6875 787.8281,19.0313 Q789.1563,17.375 791.6563,17.375 Q792.3594,17.375 793,17.5313 Q793.6563,17.6875 794.2188,17.9844 L794.2188,20.7031 Q793.5938,20.125 793,19.8594 Q792.4063,19.5781 791.7813,19.5781 Q790.4375,19.5781 789.75,20.6563 Q789.0625,21.7188 789.0625,23.8125 Q789.0625,25.9063 789.75,26.9844 Q790.4375,28.0469 791.7813,28.0469 Q792.4063,28.0469 793,27.7813 Q793.5938,27.5 794.2188,26.9219 L794.2188,29.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="29" x="811.75" y="28.1543">PING</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="664" x2="956" y1="40" y2="40"/><rect fill="none" height="6" style="stroke: #C82930; stroke-width: 1.0;" width="6" x="671" y="48"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="124" x="683" y="54.2104">player1 : static Player</text><rect fill="none" height="6" style="stroke: #C82930; stroke-width: 1.0;" width="6" x="671" y="60.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="124" x="683" y="67.0151">player2 : static Player</text><rect fill="none" height="6" style="stroke: #C82930; stroke-width: 1.0;" width="6" x="671" y="73.6094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="124" x="683" y="79.8198">player3 : static Player</text><rect fill="none" height="6" style="stroke: #C82930; stroke-width: 1.0;" width="6" x="671" y="86.4141"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="124" x="683" y="92.6245">player4 : static Player</text><rect fill="none" height="6" style="stroke: #C82930; stroke-width: 1.0;" width="6" x="671" y="99.2188"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="268" x="683" y="105.4292">raspComManager : static RaspComManagment</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="664" x2="956" y1="112.0234" y2="112.0234"/><rect fill="#F24D5C" height="6" style="stroke: #C82930; stroke-width: 1.0;" width="6" x="671" y="120.0234"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="35" x="683" y="126.2339">PING()</text><ellipse cx="674" cy="135.8281" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="44" x="683" y="139.0386">~PING()</text><ellipse cx="674" cy="148.6328" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="67" x="683" y="151.8433">loop() : void</text><ellipse cx="674" cy="161.4375" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="75" x="683" y="164.6479">setup() : void</text><!--MD5=[2cb47ba637a0d19583e6199456f6ad0b]
+class Player--><rect fill="#FEFECE" filter="url(#fswee8ym4k8z3)" height="112.0234" id="Player" style="stroke: #A80036; stroke-width: 1.5;" width="570" x="282" y="231"/><ellipse cx="543.75" cy="247" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M546.7188,252.6406 Q546.1406,252.9375 545.5,253.0781 Q544.8594,253.2344 544.1563,253.2344 Q541.6563,253.2344 540.3281,251.5938 Q539.0156,249.9375 539.0156,246.8125 Q539.0156,243.6875 540.3281,242.0313 Q541.6563,240.375 544.1563,240.375 Q544.8594,240.375 545.5,240.5313 Q546.1563,240.6875 546.7188,240.9844 L546.7188,243.7031 Q546.0938,243.125 545.5,242.8594 Q544.9063,242.5781 544.2813,242.5781 Q542.9375,242.5781 542.25,243.6563 Q541.5625,244.7188 541.5625,246.8125 Q541.5625,248.9063 542.25,249.9844 Q542.9375,251.0469 544.2813,251.0469 Q544.9063,251.0469 545.5,250.7813 Q546.0938,250.5 546.7188,249.9219 L546.7188,252.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="38" x="564.25" y="251.1543">Player</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="283" x2="851" y1="263" y2="263"/><rect fill="none" height="6" style="stroke: #C82930; stroke-width: 1.0;" width="6" x="290" y="271"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="205" x="302" y="277.2104">beamSwitch : BeamSwitchDetector*</text><rect fill="none" height="6" style="stroke: #C82930; stroke-width: 1.0;" width="6" x="290" y="283.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="147" x="302" y="290.0151">actuator : LinearActuator*</text><rect fill="none" height="6" style="stroke: #C82930; stroke-width: 1.0;" width="6" x="290" y="296.6094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="115" x="302" y="302.8198">solenoid : Solenoid*</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="283" x2="851" y1="309.4141" y2="309.4141"/><ellipse cx="293" cy="320.4141" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="544" x="302" y="323.6245">Player(int stepPin, int dirPin, int rxPin, int solenoidPin, int beamSwitchTPin, int beamSwitchRPin)</text><ellipse cx="293" cy="333.2188" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="52" x="302" y="336.4292">~Player()</text><!--MD5=[f95de7c9be227099f093800bd026f9c0]
+class RaspComManagment--><rect fill="#FEFECE" filter="url(#fswee8ym4k8z3)" height="86.4141" id="RaspComManagment" style="stroke: #A80036; stroke-width: 1.5;" width="332" x="887" y="244"/><ellipse cx="982.75" cy="260" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M985.7188,265.6406 Q985.1406,265.9375 984.5,266.0781 Q983.8594,266.2344 983.1563,266.2344 Q980.6563,266.2344 979.3281,264.5938 Q978.0156,262.9375 978.0156,259.8125 Q978.0156,256.6875 979.3281,255.0313 Q980.6563,253.375 983.1563,253.375 Q983.8594,253.375 984.5,253.5313 Q985.1563,253.6875 985.7188,253.9844 L985.7188,256.7031 Q985.0938,256.125 984.5,255.8594 Q983.9063,255.5781 983.2813,255.5781 Q981.9375,255.5781 981.25,256.6563 Q980.5625,257.7188 980.5625,259.8125 Q980.5625,261.9063 981.25,262.9844 Q981.9375,264.0469 983.2813,264.0469 Q983.9063,264.0469 984.5,263.7813 Q985.0938,263.5 985.7188,262.9219 L985.7188,265.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="132" x="1003.25" y="264.1543">RaspComManagment</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="888" x2="1218" y1="276" y2="276"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="888" x2="1218" y1="284" y2="284"/><ellipse cx="898" cy="295" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="306" x="907" y="298.2104">RaspComManagment(int txPin, int rxPin, int baudRate)</text><ellipse cx="898" cy="307.8047" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="137" x="907" y="311.0151">~RaspComManagment()</text><ellipse cx="898" cy="320.6094" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="75" x="907" y="323.8198">setup() : void</text><!--MD5=[774f4e82a168727ea092e2c64952d764]
+class Solenoid--><rect fill="#FEFECE" filter="url(#fswee8ym4k8z3)" height="73.6094" id="Solenoid" style="stroke: #A80036; stroke-width: 1.5;" width="166" x="746" y="403"/><ellipse cx="797.75" cy="419" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M800.7188,424.6406 Q800.1406,424.9375 799.5,425.0781 Q798.8594,425.2344 798.1563,425.2344 Q795.6563,425.2344 794.3281,423.5938 Q793.0156,421.9375 793.0156,418.8125 Q793.0156,415.6875 794.3281,414.0313 Q795.6563,412.375 798.1563,412.375 Q798.8594,412.375 799.5,412.5313 Q800.1563,412.6875 800.7188,412.9844 L800.7188,415.7031 Q800.0938,415.125 799.5,414.8594 Q798.9063,414.5781 798.2813,414.5781 Q796.9375,414.5781 796.25,415.6563 Q795.5625,416.7188 795.5625,418.8125 Q795.5625,420.9063 796.25,421.9844 Q796.9375,423.0469 798.2813,423.0469 Q798.9063,423.0469 799.5,422.7813 Q800.0938,422.5 800.7188,421.9219 L800.7188,424.6406 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="54" x="818.25" y="423.1543">Solenoid</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="747" x2="911" y1="435" y2="435"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="747" x2="911" y1="443" y2="443"/><ellipse cx="757" cy="454" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="140" x="766" y="457.2104">Solenoid(int solenoidPin)</text><ellipse cx="757" cy="466.8047" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="66" x="766" y="470.0151">~Solenoid()</text><!--MD5=[3d3440c247ea6d9549ddae07c5b26dc8]
+reverse link PING to Player--><path d="M699.46,179.43 C677.68,196.95 655.43,214.85 635.54,230.86 " fill="none" id="PING&lt;-Player" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="709.76,171.15,702.5775,171.792,700.4076,178.6688,707.5901,178.0269,709.76,171.15" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="692.1504" y="191.4304">4</text><!--MD5=[b067205dac567a7f0e4de4a1e8278f95]
+reverse link PING to RaspComManagment--><path d="M920.46,179.37 C948.34,201.8 977,224.86 1000.5,243.77 " fill="none" id="PING&lt;-RaspComManagment" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="910.24,171.15,912.4099,178.0269,919.5924,178.6688,917.4225,171.792,910.24,171.15" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[940de9e3ccc6844dc8fdf7ae5140b682]
+reverse link Player to BeamSwitchDetector--><path d="M419.97,348 C374.37,366.61 325.55,386.54 285.26,402.98 " fill="none" id="Player&lt;-BeamSwitchDetector" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="432.11,343.05,425.0428,341.6163,421.0013,347.5885,428.0685,349.0221,432.11,343.05" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[c8a40b61ed2cae938dabd67da6109521]
+reverse link Player to LinearActuator--><path d="M567,356.63 C567,372.61 567,389 567,402.91 " fill="none" id="Player&lt;-LinearActuator" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="567,343.37,563,349.37,567,355.37,571,349.37,567,343.37" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[0df571f1bdc863a16490465303cac24b]
+reverse link Player to Solenoid--><path d="M674.13,349.74 C705.43,367.78 738.61,386.91 766.2,402.81 " fill="none" id="Player&lt;-Solenoid" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="662.7,343.16,665.8994,349.6225,673.0953,349.1548,669.8959,342.6923,662.7,343.16" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[7b20c49208ca2b0ab664422c4255f4c7]
+@startuml
+
+
+
+
+
+
+class BeamSwitchDetector {
+	+BeamSwitchDetector(int beamSwitchTPin, int beamSwitchRPin)
+	+~BeamSwitchDetector()
+}
+
+
+class LinearActuator {
+	+LinearActuator(int stepPin, int dirPin, int rxPin)
+	+~LinearActuator()
+}
+
+
+class PING {
+	-PING()
+	+~PING()
+	-{static} player1 : static Player
+	-{static} player2 : static Player
+	-{static} player3 : static Player
+	-{static} player4 : static Player
+	-{static} raspComManager : static RaspComManagment
+	+{static} loop() : void
+	+{static} setup() : void
+}
+
+
+class Player {
+	+Player(int stepPin, int dirPin, int rxPin, int solenoidPin, int beamSwitchTPin, int beamSwitchRPin)
+	+~Player()
+	-beamSwitch : BeamSwitchDetector*
+	-actuator : LinearActuator*
+	-solenoid : Solenoid*
+}
+
+
+class RaspComManagment {
+	+RaspComManagment(int txPin, int rxPin, int baudRate)
+	+~RaspComManagment()
+	+setup() : void
+}
+
+
+class Solenoid {
+	+Solenoid(int solenoidPin)
+	+~Solenoid()
+}
+
+
+
+
+
+
+
+
+
+
+PING "4" *- - Player
+
+
+PING *- - RaspComManagment
+
+
+Player o- - BeamSwitchDetector
+
+
+Player o- - LinearActuator
+
+
+Player o- - Solenoid
+
+
+
+
+
+
+
+
+
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 10:22:07 UTC 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.24+8
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
