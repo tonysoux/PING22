@@ -10,10 +10,10 @@ Cette branche contient le code de développement pour l'ESP32, responsable de la
 - Gestion des solénoïdes et protection contre la surchauffe
 - Détection des buts et tests d'interruption de faisceau
 
-## Structure des dossiers
+## Structure du programme embarqué
 
-...
-
+<!-- visionner docs\esp32.puml -->
+![Diagramme UML ESP32](docs/esp32.svg)
 
 ## Installation et déploiement
 
