@@ -2,6 +2,7 @@
 
 /' Objects '/
 
+
 class BeamSwitchDetector {
 	+BeamSwitchDetector(int beamSwitchTPin, int beamSwitchRPin)
 	+~BeamSwitchDetector()

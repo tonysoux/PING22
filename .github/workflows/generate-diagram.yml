@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3  # Utiliser la version v3 compatible Node 16/20
     - name: Setup Java
-      uses: actions/setup-java@v3  # Utiliser la version v3 compatible Node 16/20
+      uses: actions/setup-java@v1  # Utiliser la version v3 compatible Node 16/20
       with:
         java-version: '11'
     - name: Install PlantUML
