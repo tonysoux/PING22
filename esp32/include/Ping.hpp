@@ -35,5 +35,10 @@ void PING::setup()
 
 void PING::loop()
 {
+    player1.loop();
+    player2.loop();
+    player3.loop();
+    player4.loop();
+    // raspComManager.loop();
 }
 #endif

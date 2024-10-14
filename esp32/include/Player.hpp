@@ -13,6 +13,7 @@ private:
     BeamSwitchDetector *beamSwitch;
 public:
     Player(int stepPin, int dirPin, int rxPin, int solenoidPin, int beamSwitchTPin, int beamSwitchRPin);
+    int loop();
     ~Player();
 };
 
@@ -25,6 +26,15 @@ Player::Player(int stepPin, int dirPin, int rxPin, int solenoidPin, int beamSwit
 
 Player::~Player()
 {
+}
+
+
+int Player::loop()
+{
+    // actuator->loop();
+    // solenoid->loop();
+    beamSwitch->loop();
+    return 0;
 }
 
 #endif
