@@ -3,8 +3,8 @@ name: Generate UML Diagrams
 on:
   push:
     paths:
-      - 'docs/*.puml'
-      - 'docs/plantUmlBuilder.py'  # Déclencher le workflow sur les modifications du script
+      - '**.yml'
+      
 
 jobs:
   plantuml:
