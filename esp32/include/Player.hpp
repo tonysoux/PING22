@@ -7,7 +7,6 @@
 
 class Player
 {
-// private:
 public:
     LinearActuator actuator;
     Solenoid solenoid;
