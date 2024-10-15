@@ -14,16 +14,4 @@ public:
 
     void setup();
 };
-
-RaspComManagment::RaspComManagment(int txPin, int rxPin, int baudRate)
-{
-}
-
-RaspComManagment::~RaspComManagment()
-{
-}
-
-void RaspComManagment::setup()
-{
-}
 #endif

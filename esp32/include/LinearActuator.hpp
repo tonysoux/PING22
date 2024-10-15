@@ -10,12 +10,4 @@ public:
     ~LinearActuator();
 };
 
-LinearActuator::LinearActuator(int stepPin, int dirPin, int rxPin)
-{
-}
-
-LinearActuator::~LinearActuator()
-{
-}
-
 #endif

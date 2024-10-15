@@ -1,12 +1,14 @@
-#include <Arduino.h>
 #include "PING.hpp"
 
 void setup() 
 {
+    Serial.begin(115200);
     PING::setup();
+
 }
 
 void loop()
 {
-    PING::loop();
+    Serial.println(PING::player1.beamSwitch.getState());
+    delay(100);
 }

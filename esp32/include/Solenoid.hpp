@@ -10,12 +10,4 @@ public:
     ~Solenoid();
 };
 
-Solenoid::Solenoid(int solenoidPin)
-{
-}
-
-Solenoid::~Solenoid()
-{
-}
-
 #endif
