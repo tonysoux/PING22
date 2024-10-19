@@ -1,6 +1,6 @@
 #include "Player.hpp"
 
-Player::Player(int stepPin, int dirPin, int rxPin, int solenoidPin, int beamSwitchRPin) : actuator(stepPin, dirPin, rxPin), solenoid(solenoidPin), beamSwitch(beamSwitchRPin)
+Player::Player(int stepPin, int dirPin, int address, int solenoidPin, int beamSwitchRPin) : actuator(stepPin, dirPin, address), solenoid(solenoidPin), beamSwitch(beamSwitchRPin)
 {
 }
 
@@ -17,6 +17,5 @@ int Player::setup()
 int Player::loop()
 {
     beamSwitch.check();
-    // Serial.println(beamSwitch.);
     return 0;
 }

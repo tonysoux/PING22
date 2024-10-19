@@ -1,5 +1,5 @@
-#ifndef BEAMSWITCHDETECTOR_HPP
-#define BEAMSWITCHDETECTOR_HPP
+#ifndef BEAMSWITCH_HPP
+#define BEAMSWITCH_HPP
 
 #include <IRremoteESP8266.h>
 #include <IRsend.h>
@@ -7,7 +7,7 @@
 #include <IRutils.h>
 #include "config.h"
 
-class BeamSwitchDetector
+class BeamSwitch
 {
 private:
     static IRsend emitter;      // Initialize the IR LED sender
@@ -23,8 +23,8 @@ private:
 
 public:
     static bool emit;
-    BeamSwitchDetector(int beamSwitchRPin) : irrecv(beamSwitchRPin) {};
-    ~BeamSwitchDetector(){};
+    BeamSwitch(int beamSwitchRPin) : irrecv(beamSwitchRPin) {};
+    ~BeamSwitch(){};
     static void setup_common_emitter();
     void setup();
     void check();

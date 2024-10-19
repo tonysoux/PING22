@@ -3,16 +3,16 @@
 
 #include "LinearActuator.hpp"
 #include "Solenoid.hpp"
-#include "BeamSwitchDetector.hpp"
+#include "BeamSwitch.hpp"
 
 class Player
 {
 public:
     LinearActuator actuator;
     Solenoid solenoid;
-    BeamSwitchDetector beamSwitch;
+    BeamSwitch beamSwitch;
 public:
-    Player(int stepPin, int dirPin, int rxPin, int solenoidPin, int beamSwitchRPin);
+    Player(int stepPin, int dirPin, int address, int solenoidPin, int beamSwitchRPin);
     int setup();
     int loop();
     ~Player();
