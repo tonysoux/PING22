@@ -2,20 +2,23 @@
 #define CONFIG_H
 
 // Linear actuator settings
-#define STEPS_PER_REVOLUTION 200
-#define POULLEY_TEETH 25
-#define BELT_PITCH 2
-#define MICROSTEP_POWER_OF_2 4
-#define LINEAR_ACTUATOR_MAX_SPEED 1000
-#define LINEAR_ACTUATOR_MAX_ACCELERATION 10000
-#define CALIBRATION_COARSE_SPEED 100
-#define CALIBRATION_FINE_SPEED 10
-#define FINE_CALIBRATION_SAMPLES 2
+#define STEPS_PER_REVOLUTION 200               // steps
+#define POULLEY_TEETH 25                       // teeth
+#define BELT_PITCH 2                           // mm
+#define MICROSTEP_POWER_OF_2 4                 // 2^4 = 16 microsteps
+#define LINEAR_ACTUATOR_MAX_SPEED 1000         // mm/s
+#define LINEAR_ACTUATOR_MAX_ACCELERATION 10000 // mm/s^2
+#define CALIBRATION_COARSE_SPEED 100           // mm/s
+#define CALIBRATION_FINE_SPEED 10              // mm/s
+#define FINE_CALIBRATION_SAMPLES 2             // number of samples to take for fine calibration
+#define RMS_CURRENT 400                        // mA
+#define STALL_VALUE 100                        // [0..255]
 
 // TMC Serial port settings
 #define TMC_RX -1
 #define TMC_TX -1
 #define TMC_SERIAL_PORT Serial1
+#define TMC_SERIAL_BAUD_RATE 115200
 
 #define TMC1_ADDRESS -1
 #define TMC2_ADDRESS -1
@@ -34,7 +37,6 @@
 
 #define P4_STEP_PIN -1
 #define P4_DIR_PIN -1
-
 
 #define TMC_R_SENSE 0.11f
 
@@ -57,7 +59,6 @@
 #define RASP_TX_PIN -1
 #define RASP_RX_PIN -1
 #define RASP_BAUD_RATE -1
-
 
 // TASKS CORES ASSIGNMENT, default code use core 1 (like content of setup and loop functions in main.cpp)
 #define TASK_BEAM_EMITTER_CORE 1
