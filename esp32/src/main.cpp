@@ -1,3 +1,4 @@
+#define EVERYTHING_PUBLIC
 #include "PING.hpp"
 
 void setup() 

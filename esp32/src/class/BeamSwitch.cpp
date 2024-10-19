@@ -4,7 +4,7 @@ IRsend BeamSwitch::emitter = IRsend(BEAM_T_PIN);
 bool BeamSwitch::emit = true;
 int64_t BeamSwitch::lastEmitTime = 0;
 TaskHandle_t BeamSwitch::emit_task_handle;
-uint16_t BeamSwitch::rawSignal[] = {300, 700};  // Un signal infrarouge basique de 500 µs on, 500 µs off
+uint16_t BeamSwitch::rawSignal[] = {300, 700};  // Un signal de X µs on, Y µs off
 
 
 void BeamSwitch::emit_task(void *pvParameters)
@@ -13,7 +13,7 @@ void BeamSwitch::emit_task(void *pvParameters)
     {
         if (emit)
         {
-            emitter.sendRaw(rawSignal, 2, 38);  // 38kHz fréquence
+            emitter.sendRaw(rawSignal, 2, 38);  // 38kHz
             lastEmitTime = esp_timer_get_time();
         }
         vTaskDelay(TASK_BEAM_EMITTER_DELAY_MS / portTICK_PERIOD_MS);  // Short delay for timing
@@ -37,15 +37,15 @@ void BeamSwitch::setup_common_emitter()
 
 void BeamSwitch::setup()
 {
-    irrecv.enableIRIn();
+    irRecv.enableIRIn();
 }
 
 void BeamSwitch::check()
 {
     uint64_t currentTime = esp_timer_get_time();
-    if (irrecv.decode(&results))
+    if (irRecv.decode(&results))
         {
-            irrecv.resume();
+            irRecv.resume();
             lastReceiveTime = currentTime;
         }
     

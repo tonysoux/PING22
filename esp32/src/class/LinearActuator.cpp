@@ -1,5 +1,4 @@
 #include "LinearActuator.hpp"
-// #include <SoftwareSerial.h>
 
 void LinearActuator::setup()
 {
@@ -13,16 +12,46 @@ void LinearActuator::setup()
     motor.enableOutputs();                             // enable motor outputs
 }
 
+bool LinearActuator::calibrateRight()
+{
+    setMaxSpeed(CALIBRATION_COARSE_SPEED);
+    moveRight();
+    if (status != RunStatus::COLLISION)
+        return false;
+    rightLimit = currentPosition();
+    if (leftLimit > INT_MIN)
+        motor.setCurrentPosition(amplitude() * MICRO_STEPS_PER_MM / 2);
+    setMaxSpeed(LINEAR_ACTUATOR_MAX_SPEED);
+    return true;
+}
+
+bool LinearActuator::calibrateLeft()
+{
+    setMaxSpeed(CALIBRATION_COARSE_SPEED);
+    moveLeft();
+    if (status != RunStatus::COLLISION)
+        return false;
+    leftLimit = currentPosition();
+    if (rightLimit < INT_MAX)
+        motor.setCurrentPosition( - amplitude() * MICRO_STEPS_PER_MM / 2);
+    setMaxSpeed(LINEAR_ACTUATOR_MAX_SPEED);
+    return true;
+}
+
+void LinearActuator::instantStop()
+{
+    motor.setSpeed(0);
+    motor.runSpeed();
+}
+
 int LinearActuator::run()
 {
     motor.run();
-
-    // check for collision using driver's stallguard
     if (driver.SG_RESULT() > STALL_VALUE)
     {
-        motor.setSpeed(0);
-        motor.runSpeed();
+        instantStop();
         return RunStatus::COLLISION;
     }
     return RunStatus::RUNNING;
 }
+

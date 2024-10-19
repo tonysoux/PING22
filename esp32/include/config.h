@@ -3,14 +3,16 @@
 
 // Linear actuator settings
 #define STEPS_PER_REVOLUTION 200               // steps
-#define POULLEY_TEETH 25                       // teeth
+#define PULLEY_TEETH 25                        // teeth of the pulley
 #define BELT_PITCH 2                           // mm
 #define MICROSTEP_POWER_OF_2 4                 // 2^4 = 16 microsteps
 #define LINEAR_ACTUATOR_MAX_SPEED 1000         // mm/s
 #define LINEAR_ACTUATOR_MAX_ACCELERATION 10000 // mm/s^2
 #define CALIBRATION_COARSE_SPEED 100           // mm/s
+#define WITHDRAWAL_DISTANCE 10                 // mm
 #define CALIBRATION_FINE_SPEED 10              // mm/s
 #define FINE_CALIBRATION_SAMPLES 2             // number of samples to take for fine calibration
+#define ERROR_THRESHOLD 1                      // mm
 #define RMS_CURRENT 400                        // mA
 #define STALL_VALUE 100                        // [0..255]
 
@@ -73,6 +75,6 @@
 #define TASK_SOLENOID_PRIORITY 3
 #define TASK_RASP_COMMUNICATION_PRIORITY 1
 // TASKS delay between each call, to free the CPU
-#define TASK_BEAM_EMITTER_DELAY_MS 1
+#define TASK_BEAM_EMITTER_DELAY_MS 10
 
 #endif

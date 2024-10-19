@@ -8,22 +8,24 @@ Everything may be static, as there is only one instance of the game.
 
 #include "Player.hpp"
 #include "config.h"
-#include "RaspComManagment.hpp"
+#include "RaspComManagement.hpp"
 
 class PING
 {
-// private:  
-public: 
-    PING(){};
-    static Player player1, player2, player3, player4;
-    static RaspComManagment raspComManager;
-    static TaskHandle_t BeamSwitchReceive_task_handle;
-    static void BeamSwitchReceive_task(void *pvParameters);
+private:
+    PING() {};
 
 public:
-    ~PING(){};
+    ~PING() {};
     static void setup();
 
+#ifndef EVERYTHING_PUBLIC
+private:
+#endif
+    static Player player1, player2, player3, player4;
+    static RaspComManagement raspComManager;
+    static TaskHandle_t BeamSwitchReceive_task_handle;
+    static void BeamSwitchReceive_task(void *pvParameters);
 };
 
 #endif
