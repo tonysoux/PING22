@@ -11,8 +11,6 @@ Cette branche contient le code de développement pour l'ESP32, responsable de la
 - Détection des buts et tests d'interruption de faisceau
 
 ## Structure du programme embarqué
-
-<!-- visionner docs\esp32.puml -->
 ![Diagramme UML ESP32](docs/esp32.svg)
 
 ## Installation et déploiement
@@ -29,8 +27,8 @@ Cette branche contient le code de développement pour l'ESP32, responsable de la
 
 ## Avancement
    - [X] Initialisation du .ini
-   - [ ] Implémentation du contrôle moteur
+   - [X] Implémentation du contrôle moteur
    - [ ] Gestion des solénoïdes
    - [X] Détection des buts
-   - [ ] Calibration automatique
+   - [X] Calibration automatique
    - [ ] Tests unitaires
