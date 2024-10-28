@@ -45,3 +45,7 @@ Les instructions d'installation spécifiques pour chaque partie du projet sont d
 1. Clonez le dépôt
    ```bash
    git clone https://github.com/robinAZERTY/ping2.git
+	```
+## Licence
+
+Ping² © 2024 by Antoine, Antoine, Robin, Simon, Thomas is licensed under [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/)
