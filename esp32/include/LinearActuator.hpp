@@ -28,6 +28,8 @@ public:
     void setup();
     bool calibrateRight();
     bool calibrateLeft();
+    bool checkRightCalibration();
+    // bool checkLeftCalibration();
     void setSpeed(float speed) { motor.setSpeed(min(speed, LINEAR_ACTUATOR_MAX_SPEED) * MICRO_STEPS_PER_MM); }
     void setMaxSpeed(float speed) { motor.setMaxSpeed(min(speed, LINEAR_ACTUATOR_MAX_SPEED) * MICRO_STEPS_PER_MM); }
     void setAcceleration(float acceleration) { motor.setAcceleration(min(acceleration, LINEAR_ACTUATOR_MAX_ACCELERATION) * MICRO_STEPS_PER_MM); }

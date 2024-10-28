@@ -25,6 +25,11 @@ bool LinearActuator::calibrateRight()
     return true;
 }
 
+bool LinearActuator::checkRightCalibration()
+{
+    
+}
+
 bool LinearActuator::calibrateLeft()
 {
     setMaxSpeed(CALIBRATION_COARSE_SPEED);
