@@ -1,4 +1,4 @@
-# PING² Project -
+# PING² Project
 
 Bienvenue sur le dépôt GitHub du projet **PING²**. Ce projet est un jeu sur plateau avec des surfaces de rebond robotisées, conçu pour aider à la rééducation et à la stimulation de la motricité, notamment pour les personnes à mobilité réduite.
 
