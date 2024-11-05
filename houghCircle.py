@@ -60,3 +60,90 @@ Différences avec la méthode classique :
         La fonction de vraisemblance ne traite que les chunks sélectionnés, au lieu de travailler sur l’ensemble de l’accumulateur, 
         ce qui réduit la complexité du calcul et le rend plus rapide.
 '''
+
+import numpy as np
+import cv2
+
+
+class ParticlesInCamFrame:
+    def __init__(self):
+        self.x = np.array([])
+        self.y = np.array([])
+        self.r = np.array([])
+        self.likelihood = np.array([])
+
+class AccChunk:
+    def __init__(self):
+        self.x0 = None
+        self.y0 = None
+        self.d = None
+        self.chunks = np.array([])
+        
+    def computeChunkSize(self, uniqueRadiusParticles):
+        '''
+        Calcul des "chunks" de l'accumulateur de Hough.
+        '''
+        self.x0 = np.min(uniqueRadiusParticles.x)-uniqueRadiusParticles.r
+        self.y0 = np.min(uniqueRadiusParticles.y)-uniqueRadiusParticles.r
+        self.d = uniqueRadiusParticles.r
+        max_x = np.max(uniqueRadiusParticles.x)+uniqueRadiusParticles.r
+        max_y = np.max(uniqueRadiusParticles.y)+uniqueRadiusParticles.r
+        nx = np.ceil((max_x - self.x0) / self.d).astype(int)
+        ny = np.ceil((max_y - self.y0) / self.d).astype(int)
+        self.chunks.resize((nx, ny), refcheck=False)
+        # ix = (uniqueRadiusParticles.x - self.x0) // self.d
+        # iy = (uniqueRadiusParticles.y - self.y0) // self.d
+        # ... ? trop fatigué pour continuer
+        
+        
+
+class HoughCircle:
+    def __init__(self):
+        self.Gx = None
+        self.Gy = None
+        self.G = None
+        self.Gt = None
+        self.N_Gx = None
+        self.N_Gy = None
+        self.acc_xy = None
+        self.rr = None
+        self.acc = [] #[AccChunk() for _ in range(4)]
+        
+    def computeContours(self, grayImage, threshold = 50):
+        '''
+        Calcul des contours significatifs de l'image.
+        '''
+        # a. Calcul du gradient de Sobel
+        self.Gx = cv2.Sobel(grayImage, cv2.CV_32F, 1, 0, ksize=3)
+        self.Gy = cv2.Sobel(grayImage, cv2.CV_32F, 0, 1, ksize=3)
+        # b. Calcul de la magnitude du gradient
+        self.G = cv2.magnitude(self.Gx, self.Gy)
+        # c. Seuil appliqué à la magnitude du gradient
+        self.Gt = self.G > threshold
+               
+    
+    def computeHoughAccumulator(self, particles):
+        '''
+        Calcul de l'accumulateur de Hough pour les cercles.
+        '''
+        # a. Normalisation des gradients
+        self.N_Gx = self.Gx / self.G
+        self.N_Gy = self.Gy / self.G
+        # b. Détermination des indices de l'accumulateur
+        x, y = np.nonzero(self.Gt)
+        self.rr = np.unique(particles.r)
+        dx = self.rr * self.N_Gx[x, y]
+        dy = self.rr * self.N_Gy[x, y]
+        acc_x = np.concatenate((x + dx, x - dx))
+        acc_y = np.concatenate((y + dy, y - dy))
+        self.acc_xy = np.array([acc_x, acc_y])
+        #  c. Classification des indices en "chunks" de taille r
+        
+        
+    
+    
+    def likelihood(self, ballPose, additiveNoise):
+        '''
+        Calcul de la vraisemblance de la présence d'un cercle de position et de rayon donnés.
+        '''
+        pass
