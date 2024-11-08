@@ -60,7 +60,9 @@ Différences avec la méthode classique :
         La fonction de vraisemblance ne traite que les chunks sélectionnés, au lieu de travailler sur l’ensemble de l’accumulateur, 
         ce qui réduit la complexité du calcul et le rend plus rapide.
 '''
-
+'''
+version sans les chunks et pour un seul rayon
+'''
 import numpy as np
 import cv2
 
@@ -69,31 +71,32 @@ class ParticlesInCamFrame:
     def __init__(self):
         self.x = np.array([])
         self.y = np.array([])
-        self.r = np.array([])
+        self.xy = np.column_stack((self.x, self.y))
+        self.r = 10
         self.likelihood = np.array([])
 
-class AccChunk:
-    def __init__(self):
-        self.x0 = None
-        self.y0 = None
-        self.d = None
-        self.chunks = np.array([])
+# class AccChunk:
+#     def __init__(self):
+#         self.x0 = None
+#         self.y0 = None
+#         self.d = None
+#         self.chunks = np.array([])
         
-    def computeChunkSize(self, uniqueRadiusParticles):
-        '''
-        Calcul des "chunks" de l'accumulateur de Hough.
-        '''
-        self.x0 = np.min(uniqueRadiusParticles.x)-uniqueRadiusParticles.r
-        self.y0 = np.min(uniqueRadiusParticles.y)-uniqueRadiusParticles.r
-        self.d = uniqueRadiusParticles.r
-        max_x = np.max(uniqueRadiusParticles.x)+uniqueRadiusParticles.r
-        max_y = np.max(uniqueRadiusParticles.y)+uniqueRadiusParticles.r
-        nx = np.ceil((max_x - self.x0) / self.d).astype(int)
-        ny = np.ceil((max_y - self.y0) / self.d).astype(int)
-        self.chunks.resize((nx, ny), refcheck=False)
-        # ix = (uniqueRadiusParticles.x - self.x0) // self.d
-        # iy = (uniqueRadiusParticles.y - self.y0) // self.d
-        # ... ? trop fatigué pour continuer
+#     def computeChunkSize(self, uniqueRadiusParticles):
+#         '''
+#         Calcul des "chunks" de l'accumulateur de Hough.
+#         '''
+#         self.x0 = np.min(uniqueRadiusParticles.x)-uniqueRadiusParticles.r
+#         self.y0 = np.min(uniqueRadiusParticles.y)-uniqueRadiusParticles.r
+#         self.d = uniqueRadiusParticles.r
+#         max_x = np.max(uniqueRadiusParticles.x)+uniqueRadiusParticles.r
+#         max_y = np.max(uniqueRadiusParticles.y)+uniqueRadiusParticles.r
+#         nx = np.ceil((max_x - self.x0) / self.d).astype(int)
+#         ny = np.ceil((max_y - self.y0) / self.d).astype(int)
+#         self.chunks.resize((nx, ny), refcheck=False)
+#         # ix = (uniqueRadiusParticles.x - self.x0) // self.d
+#         # iy = (uniqueRadiusParticles.y - self.y0) // self.d
+#         # ... ? trop fatigué pour continuer
         
         
 
@@ -106,8 +109,8 @@ class HoughCircle:
         self.N_Gx = None
         self.N_Gy = None
         self.acc_xy = None
-        self.rr = None
-        self.acc = [] #[AccChunk() for _ in range(4)]
+        # self.rr = None
+        # self.acc = [] #[AccChunk() for _ in range(4)]
         
     def computeContours(self, grayImage, threshold = 50):
         '''
@@ -119,7 +122,9 @@ class HoughCircle:
         # b. Calcul de la magnitude du gradient
         self.G = cv2.magnitude(self.Gx, self.Gy)
         # c. Seuil appliqué à la magnitude du gradient
-        self.Gt = self.G > threshold
+        # self.Gt = self.G > threshold
+        # ou canny
+        self.Gt = cv2.Canny(grayImage, 100, 200).astype(bool)
                
     
     def computeHoughAccumulator(self, particles):
@@ -131,19 +136,102 @@ class HoughCircle:
         self.N_Gy = self.Gy / self.G
         # b. Détermination des indices de l'accumulateur
         x, y = np.nonzero(self.Gt)
-        self.rr = np.unique(particles.r)
-        dx = self.rr * self.N_Gx[x, y]
-        dy = self.rr * self.N_Gy[x, y]
-        acc_x = np.concatenate((x + dx, x - dx))
-        acc_y = np.concatenate((y + dy, y - dy))
+        self.rr = particles.r
+        dx = self.rr * self.N_Gx[y, x]
+        dy = self.rr * self.N_Gy[y, x]
+        acc_x = np.concatenate((x - dx, x + dx))
+        acc_y = np.concatenate((y - dy, y + dy))
         self.acc_xy = np.array([acc_x, acc_y])
-        #  c. Classification des indices en "chunks" de taille r
         
         
     
     
-    def likelihood(self, ballPose, additiveNoise):
+    def likelihood(self, particles, additiveNoise_factor = 0.5):
         '''
         Calcul de la vraisemblance de la présence d'un cercle de position et de rayon donnés.
+        d² = dx**2 + dy**2
+        likelihood = exp(-d**2/(2*additiveNoise**2))
         '''
-        pass
+        if particles.r != self.rr:
+            return np.zeros(particles.x.shape)
+        
+        # b. Calcul de la somme des distances gaussiennes
+        # d2 = (self.acc_xy - particles.xy)**2 #ValueError: operands could not be broadcast together with shapes (2,496) (400,2), d2 should be (400, 496, 2)
+    # Supposons self.acc_xy a une forme (496, 2) et particles.xy a une forme (400, 2)
+        d2 = (self.acc_xy.T[np.newaxis, :, :] - particles.xy[:, np.newaxis, :]) # Résultat de forme (400, 496, 2)
+        d2 = np.sum(d2**2, axis=2) # Résultat de forme (400, 496)
+        
+        s = additiveNoise_factor * particles.r
+        likelihood = np.exp(-d2 / (2*s**2))
+        likelihood = np.sum(likelihood, axis=1)
+        
+        # c. Normalisation de la réponse par le la circonférence du cercle
+        likelihood /= 2*np.pi*self.rr
+        
+        return likelihood
+
+
+if __name__ == "__main__":
+    print("HoughCircle class")
+    import matplotlib.pyplot as plt
+    # Création d'une image de test
+    img = np.zeros((200, 200), dtype=np.uint8)
+    cv2.circle(img, (100, 100), 20, 255, -1)
+    cv2.rectangle(img, (150, 150), (180, 180), 255, -1)
+    
+    # visualisation
+    # plt.imshow(img, cmap='gray')
+    # plt.show()
+    
+    H = HoughCircle()
+    H.computeContours(img)
+    
+    # visualisation
+    # plt.imshow(H.Gt, cmap='gray')
+    # plt.show()
+    print(np.sum(H.Gt))
+    
+    # maillage de particules avec np.meshgrid
+    particles = ParticlesInCamFrame()
+    x = np.linspace(0, 200, 200)
+    y = np.linspace(0, 200, 200)
+    particles.x, particles.y = np.meshgrid(x, y)
+    particles.xy = np.column_stack((particles.x.flatten(), particles.y.flatten()))
+    particles.r = 20
+    print(particles.xy.shape)
+    # visualisation
+    # plt.scatter(particles.x.flatten(), particles.y.flatten())
+    # plt.show()
+    
+    # calcul de l'accumulateur de Hough
+    H.computeHoughAccumulator(particles)
+    
+    # visualisation
+    # plt.imshow(img, cmap='gray')
+    # plt.scatter(H.acc_xy[0], H.acc_xy[1], color='r', s=1)
+    # plt.show()
+    print(H.acc_xy.shape)
+    
+    # calcul de la vraisemblance
+    likelihood = H.likelihood(particles, additiveNoise_factor=0.1)
+    print(likelihood.shape)
+    
+    # # visualisation
+    # plt.imshow(likelihood.reshape(60, 60))
+    # plt.show()
+    
+    
+    
+    # 2*2 instead of 1*4
+    fig, ax = plt.subplots(2, 2, figsize=(10, 10))
+    ax[0, 0].imshow(img, cmap='gray')
+    ax[0, 0].set_title('Image')
+    ax[0, 1].imshow(H.Gt, cmap='gray')
+    ax[0, 1].set_title('Contours')
+    ax[1, 0].scatter(H.acc_xy[1], H.acc_xy[0], color='r', s=1)
+    ax[1, 0].set_aspect('equal')
+    ax[1, 0].set_title('Accumulateur de Hough')
+    ax[1, 1].imshow(likelihood.reshape(200, 200))
+    ax[1, 1].set_title('Vraisemblance')
+    plt.show()
+    
