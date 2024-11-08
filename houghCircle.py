@@ -127,7 +127,7 @@ class HoughCircle:
         self.Gt = cv2.Canny(grayImage, 100, 200).astype(bool)
                
     
-    def computeHoughAccumulator(self, particles):
+    def computeHoughAccumulator(self, radius):
         '''
         Calcul de l'accumulateur de Hough pour les cercles.
         '''
@@ -136,7 +136,7 @@ class HoughCircle:
         self.N_Gy = self.Gy / self.G
         # b. Détermination des indices de l'accumulateur
         x, y = np.nonzero(self.Gt)
-        self.rr = particles.r
+        self.rr = radius
         dy = self.rr * self.N_Gx[x, y]
         dx = self.rr * self.N_Gy[x, y]
         acc_x = np.concatenate((x - dx, x + dx))
@@ -172,49 +172,83 @@ class HoughCircle:
 
 
 if __name__ == "__main__":
+    def add_salt_and_pepper_noise(image, salt_prob=0.01, pepper_prob=0.01):
+        """
+        Ajoute du bruit "sel et poivre" à une image.
+        
+        :param image: Image d'entrée (grayscale ou couleur)
+        :param salt_prob: Probabilité d'ajouter un pixel "sel" (blanc)
+        :param pepper_prob: Probabilité d'ajouter un pixel "poivre" (noir)
+        :return: Image avec bruit "sel et poivre"
+        """
+        # Créer une copie de l'image pour éviter de modifier l'image d'origine
+        noisy_image = image.copy()
+        
+        # Générer le bruit "sel" (pixels blancs)
+        num_salt = int(salt_prob * image.size)
+        coords_salt = [np.random.randint(0, i - 1, num_salt) for i in image.shape]
+        noisy_image[tuple(coords_salt)] = 255
+        
+        # Générer le bruit "poivre" (pixels noirs)
+        num_pepper = int(pepper_prob * image.size)
+        coords_pepper = [np.random.randint(0, i - 1, num_pepper) for i in image.shape]
+        noisy_image[tuple(coords_pepper)] = 0
+        
+        return noisy_image
+
     print("HoughCircle class")
     import matplotlib.pyplot as plt
     # Création d'une image de test
     img = np.zeros((200, 200), dtype=np.uint8)
-    cv2.circle(img, (150, 100), 30, 255, -1)
+    cv2.circle(img, (210, 100), 30, 255, -1)
     cv2.rectangle(img, (120, 120), (180, 180), 255, -1)
-    
+    # gaussian blur
+    img = cv2.GaussianBlur(img, (7, 7), 0)
+    # ajout de bruit
+    img = img + 10*np.random.randn(*img.shape) # gaussian noise
+    # poivre et sel
+    img = add_salt_and_pepper_noise(img)
+    img = np.clip(img, 0, 255).astype(np.uint8)
     # visualisation
-    # plt.imshow(img, cmap='gray')
-    # plt.show()
+    plt.imshow(img, cmap='gray')
+    plt.show()
     
     H = HoughCircle()
-    H.computeContours(img)
-    
+    # filtre median
+    prepared_img = cv2.medianBlur(img, 3)
+    H.computeContours(prepared_img)
+    H.computeHoughAccumulator(30)
+
     # visualisation
     # plt.imshow(H.Gt, cmap='gray')
     # plt.show()
-    print(np.sum(H.Gt))
     
     # maillage de particules avec np.meshgrid
     particles = ParticlesInCamFrame()
-    x = np.linspace(0, 200, 200)
-    y = np.linspace(0, 200, 200)
+    x_min = np.floor(np.min(H.acc_xy[0])).astype(int)
+    x_max = np.ceil(np.max(H.acc_xy[0])).astype(int)
+    y_min = np.floor(np.min(H.acc_xy[1])).astype(int)
+    y_max = np.ceil(np.max(H.acc_xy[1])).astype(int)
+    xd = x_max - x_min + 1
+    yd = y_max - y_min + 1
+    x = np.linspace(x_min, x_max, xd)
+    y = np.linspace(y_min, y_max, yd)
     particles.x, particles.y = np.meshgrid(x, y)
     particles.xy = np.column_stack((particles.x.flatten(), particles.y.flatten()))
     particles.r = 30
-    print(particles.xy.shape)
     # visualisation
     # plt.scatter(particles.x.flatten(), particles.y.flatten())
     # plt.show()
-    
     # calcul de l'accumulateur de Hough
-    H.computeHoughAccumulator(particles)
+    
     
     # visualisation
     # plt.imshow(img, cmap='gray')
     # plt.scatter(H.acc_xy[0], H.acc_xy[1], color='r', s=1)
     # plt.show()
-    print(H.acc_xy.shape)
     
     # calcul de la vraisemblance
-    likelihood = H.likelihood(particles, additiveNoise_factor=0.05)
-    print(likelihood.shape)
+    likelihood = H.likelihood(particles, additiveNoise_factor=1/12)
     
     # # visualisation
     # plt.imshow(likelihood.reshape(60, 60))
@@ -231,7 +265,8 @@ if __name__ == "__main__":
     ax[1, 0].scatter(H.acc_xy[1], H.acc_xy[0], color='r', s=1)
     ax[1, 0].set_aspect('equal')
     ax[1, 0].set_title('Accumulateur de Hough')
-    ax[1, 1].imshow(likelihood.reshape(200, 200).T)
+    likelihood_image = ax[1, 1].imshow(likelihood.reshape(yd, xd).T, cmap='viridis')
     ax[1, 1].set_title('Vraisemblance')
+    plt.colorbar(likelihood_image, ax=ax[1, 1], orientation='vertical')
     plt.show()
     
