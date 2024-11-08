@@ -11,6 +11,7 @@ Player::~Player()
 int Player::setup()
 {
     beamSwitch.setup();
+    actuator.setup();
     return 0;
 }
 

@@ -4,7 +4,7 @@
 #include <TMCStepper.h>
 #include "config.h"
 
-#define MICRO_STEPS_PER_MM (float)STEPS_PER_REVOLUTION *PULLEY_TEETH / BELT_PITCH / (1 << MICROSTEP_POWER_OF_2)
+#define MICRO_STEPS_PER_MM (float)STEPS_PER_REVOLUTION / PULLEY_TEETH / BELT_PITCH * (1 << MICROSTEP_POWER_OF_2)
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) > (b) ? (a) : (b))
 #define saturate(a, low, high) (min(max(a, low), high))
