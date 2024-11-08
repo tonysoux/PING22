@@ -12,7 +12,7 @@ reverse link PING to Player--><path d="M564.23,193.53 C546.84,210.52 529.08,227.
 reverse link PING to RaspComManagement--><path d="M761.8,193.55 C789.18,220.31 817.49,247.98 839.86,269.84 " fill="none" id="PING&lt;-RaspComManagement" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="752.17,184.14,753.6665,191.1941,760.7536,192.5258,759.2571,185.4717,752.17,184.14" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[8974d906f5436deded3f8d9665c498e8]
 reverse link Player to BeamSwitch--><path d="M330.8,390.32 C310.31,406.35 289.81,423.92 272,442 C252.84,461.46 234.25,483.68 217.19,505.99 " fill="none" id="Player&lt;-BeamSwitch" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="341.17,382.34,333.9756,382.8302,331.661,389.6597,338.8554,389.1695,341.17,382.34" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[c8a40b61ed2cae938dabd67da6109521]
 reverse link Player to LinearActuator--><path d="M443,395.35 C443,409.91 443,425.65 443,441.87 " fill="none" id="Player&lt;-LinearActuator" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="443,382.32,439,388.32,443,394.32,447,388.32,443,382.32" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[0df571f1bdc863a16490465303cac24b]
-reverse link Player to Solenoid--><path d="M560.29,390.51 C579.59,406.14 598.37,423.52 614,442 C655.53,491.1 686.05,560.17 702.12,601.85 " fill="none" id="Player&lt;-Solenoid" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="549.85,382.25,552.0729,389.1099,559.2602,389.6964,557.0372,382.8365,549.85,382.25" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[6a15b4d92c79b26c0910c9c0addda498]
+reverse link Player to Solenoid--><path d="M560.29,390.51 C579.59,406.14 598.37,423.52 614,442 C655.53,491.1 686.05,560.17 702.12,601.85 " fill="none" id="Player&lt;-Solenoid" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="549.85,382.25,552.0729,389.1099,559.2602,389.6964,557.0372,382.8365,549.85,382.25" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[bcc32f40fae37482398d58c6cddc9826]
 @startuml
 
 
@@ -158,7 +158,7 @@ PlantUML version 1.2020.02(Sun Mar 01 10:22:07 UTC 2020)
 (GPL source distribution)
 Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
-Java Version: 11.0.24+8
+Java Version: 11.0.25+9
 Operating System: Linux
 Default Encoding: UTF-8
 Language: en
