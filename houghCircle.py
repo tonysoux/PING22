@@ -137,8 +137,8 @@ class HoughCircle:
         # b. Détermination des indices de l'accumulateur
         x, y = np.nonzero(self.Gt)
         self.rr = particles.r
-        dx = self.rr * self.N_Gx[y, x]
-        dy = self.rr * self.N_Gy[y, x]
+        dy = self.rr * self.N_Gx[x, y]
+        dx = self.rr * self.N_Gy[x, y]
         acc_x = np.concatenate((x - dx, x + dx))
         acc_y = np.concatenate((y - dy, y + dy))
         self.acc_xy = np.array([acc_x, acc_y])
@@ -176,8 +176,8 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
     # Création d'une image de test
     img = np.zeros((200, 200), dtype=np.uint8)
-    cv2.circle(img, (100, 100), 20, 255, -1)
-    cv2.rectangle(img, (150, 150), (180, 180), 255, -1)
+    cv2.circle(img, (150, 100), 30, 255, -1)
+    cv2.rectangle(img, (120, 120), (180, 180), 255, -1)
     
     # visualisation
     # plt.imshow(img, cmap='gray')
@@ -197,7 +197,7 @@ if __name__ == "__main__":
     y = np.linspace(0, 200, 200)
     particles.x, particles.y = np.meshgrid(x, y)
     particles.xy = np.column_stack((particles.x.flatten(), particles.y.flatten()))
-    particles.r = 20
+    particles.r = 30
     print(particles.xy.shape)
     # visualisation
     # plt.scatter(particles.x.flatten(), particles.y.flatten())
@@ -213,7 +213,7 @@ if __name__ == "__main__":
     print(H.acc_xy.shape)
     
     # calcul de la vraisemblance
-    likelihood = H.likelihood(particles, additiveNoise_factor=0.1)
+    likelihood = H.likelihood(particles, additiveNoise_factor=0.05)
     print(likelihood.shape)
     
     # # visualisation
@@ -231,7 +231,7 @@ if __name__ == "__main__":
     ax[1, 0].scatter(H.acc_xy[1], H.acc_xy[0], color='r', s=1)
     ax[1, 0].set_aspect('equal')
     ax[1, 0].set_title('Accumulateur de Hough')
-    ax[1, 1].imshow(likelihood.reshape(200, 200))
+    ax[1, 1].imshow(likelihood.reshape(200, 200).T)
     ax[1, 1].set_title('Vraisemblance')
     plt.show()
     
