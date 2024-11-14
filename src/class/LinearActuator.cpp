@@ -7,6 +7,7 @@ void LinearActuator::setup()
     driver.blank_time(24);                             // set driver blank time (time between two chopper off times)
     driver.rms_current(RMS_CURRENT);                   // set driver RMS current
     driver.microsteps(1 << MICROSTEP_POWER_OF_2);      // set driver microsteps
+    driver.TCOOLTHRS(0xFFFFF);                         
     setMaxSpeed(LINEAR_ACTUATOR_MAX_SPEED);            // set max speed
     setAcceleration(LINEAR_ACTUATOR_MAX_ACCELERATION); // set acceleration
     motor.enableOutputs();                             // enable motor outputs

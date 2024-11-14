@@ -17,12 +17,10 @@
 #define STALL_VALUE 100                        // [0..255]
 
 // TMC Serial port settings
-#define TMC_RX GPIO_NUM_16
-#define TMC_TX GPIO_NUM_17
 #define TMC_SERIAL_PORT Serial2
 #define TMC_SERIAL_BAUD_RATE 115200
 
-#define TMC1_ADDRESS -1
+#define TMC1_ADDRESS 0b00
 #define TMC2_ADDRESS -1
 #define TMC3_ADDRESS -1
 #define TMC4_ADDRESS -1
