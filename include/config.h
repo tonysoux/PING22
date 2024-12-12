@@ -5,29 +5,29 @@
 #define STEPS_PER_REVOLUTION 200               // steps
 #define PULLEY_TEETH 25                        // teeth of the pulley
 #define BELT_PITCH 2                           // mm
-#define MICROSTEP_POWER_OF_2 4                 // 2^4 = 16 microsteps
-#define LINEAR_ACTUATOR_MAX_SPEED 1000         // mm/s
-#define LINEAR_ACTUATOR_MAX_ACCELERATION 10000 // mm/s^2
+#define MICROSTEP_POWER_OF_2 5                 // 2^5 = 32 microsteps
+#define LINEAR_ACTUATOR_MAX_SPEED 1000.0f         // mm/s
+#define LINEAR_ACTUATOR_MAX_ACCELERATION 10000.0f // mm/s^2
 #define CALIBRATION_COARSE_SPEED 100           // mm/s
 #define WITHDRAWAL_DISTANCE 10                 // mm
 #define CALIBRATION_FINE_SPEED 10              // mm/s
 #define FINE_CALIBRATION_SAMPLES 2             // number of samples to take for fine calibration
 #define ERROR_THRESHOLD 1                      // mm
-#define RMS_CURRENT 400                        // mA
-#define STALL_VALUE 100                        // [0..255]
+#define RMS_CURRENT 20                        // percent of the max current
+#define STALL_VALUE 60                        // [0..255]
 
 // TMC Serial port settings
 #define TMC_SERIAL_PORT Serial2
 #define TMC_SERIAL_BAUD_RATE 115200
 
-#define TMC1_ADDRESS 0b00
-#define TMC2_ADDRESS -1
-#define TMC3_ADDRESS -1
-#define TMC4_ADDRESS -1
+#define TMC1_ADDRESS TMC2209::SERIAL_ADDRESS_0
+#define TMC2_ADDRESS TMC2209::SERIAL_ADDRESS_0
+#define TMC3_ADDRESS TMC2209::SERIAL_ADDRESS_0
+#define TMC4_ADDRESS TMC2209::SERIAL_ADDRESS_0
 
 // TMC Dir and Step Settings
-#define P1_STEP_PIN GPIO_NUM_32
-#define P1_DIR_PIN GPIO_NUM_33
+#define P1_STEP_PIN GPIO_NUM_4
+#define P1_DIR_PIN GPIO_NUM_2
 
 #define P2_STEP_PIN -1
 #define P2_DIR_PIN -1

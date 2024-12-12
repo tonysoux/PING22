@@ -7,149 +7,211 @@
 //     PING::setup();
 //     Serial.println("Setup done");
 //     PING::player1.actuator.moveRight();
-
+//     PING::player1.actuator.setCurrentPosition(0);
 // }
 // unsigned long lastTime = 0;
-
+// float target = 150;
 // void loop()
 // {
 //     PING::player1.actuator.run();
 //     if (millis() - lastTime > 1000)
 //     {
 //         lastTime = millis();
-//         Serial.println(PING::player1.actuator.currentPosition());
+//         Serial.print(PING::player1.actuator.currentPosition());
+//         Serial.print("\t");
+//         Serial.print(PING::player1.actuator.currentSpeed());
+//         Serial.print("\t");
+//         Serial.print(PING::player1.actuator.currentAcceleration());
+//         Serial.print("\t");
+//         Serial.print(PING::player1.actuator.maxSpeed());
+//         Serial.print("\t");
+//         Serial.print(PING::player1.actuator.driver.getStallGuardResult());
+//         Serial.print("\t");
+//         Serial.println(PING::player1.actuator.driver.isSetupAndCommunicating());
+
 //     }
-//     vTaskDelay(1);
+//     // vTaskDelay(1);
 // }
 
-// #include <Arduino.h>
-// #include <AccelStepper.h>
-// #include <TMCStepper.h>
-// #include "config.h"
+// /**
+//  * Author Teemu Mäntykallio
+//  * Initializes the library and runs the stepper
+//  * motor in alternating directions.
+//  * les connexions
+//  *  TMC2209   ESP32
+//  * STEP_PIN  GPIO4
+//  * TX        GPIO17 (Serial2 TX)
+//  * EN        GND
+//  */
 
-// #define MICRO_STEPS_PER_MM (float)STEPS_PER_REVOLUTION / PULLEY_TEETH / BELT_PITCH * (1 << MICROSTEP_POWER_OF_2)
-// AccelStepper motor = AccelStepper(AccelStepper::DRIVER, P1_STEP_PIN, P1_DIR_PIN);
-// TMC2209Stepper driver = TMC2209Stepper(&TMC_SERIAL_PORT, TMC_R_SENSE, TMC1_ADDRESS);
+// #include <TMCStepper.h>
+
+// // #define EN_PIN           38 // Enable
+// #define DIR_PIN          55 // Direction
+// #define STEP_PIN         GPIO_NUM_4 // Step
+// // #define CS_PIN           42 // Chip select
+// // #define SW_MOSI          66 // Software Master Out Slave In (MOSI)
+// // #define SW_MISO          44 // Software Master In Slave Out (MISO)
+// // #define SW_SCK           64 // Software Slave Clock (SCK)
+// // #define SW_RX            16 // TMC2208/TMC2224 SoftwareSerial receive pin
+// // #define SW_TX            17 // TMC2208/TMC2224 SoftwareSerial transmit pin
+// #define SERIAL_PORT Serial2 // TMC2208/TMC2224 HardwareSerial port
+// #define DRIVER_ADDRESS 0b00 // TMC2209 Driver address according to MS1 and MS2
+
+// #define R_SENSE 0.11f // Match to your driver
+//                       // SilentStepStick series use 0.11
+//                       // UltiMachine Einsy and Archim2 boards use 0.2
+//                       // Panucatt BSD2660 uses 0.1
+//                       // Watterott TMC5160 uses 0.075
+
+// // Select your stepper driver type
+// //TMC2130Stepper driver(CS_PIN, R_SENSE);                           // Hardware SPI
+// //TMC2130Stepper driver(CS_PIN, R_SENSE, SW_MOSI, SW_MISO, SW_SCK); // Software SPI
+// //TMC2660Stepper driver(CS_PIN, R_SENSE);                           // Hardware SPI
+// //TMC2660Stepper driver(CS_PIN, R_SENSE, SW_MOSI, SW_MISO, SW_SCK);
+// //TMC5160Stepper driver(CS_PIN, R_SENSE);
+// //TMC5160Stepper driver(CS_PIN, R_SENSE, SW_MOSI, SW_MISO, SW_SCK);
+
+// // TMC2208Stepper driver(&SERIAL_PORT, R_SENSE);                     // Hardware Serial
+// //TMC2208Stepper driver(SW_RX, SW_TX, R_SENSE);                     // Software serial
+// TMC2209Stepper driver(&SERIAL_PORT, R_SENSE, DRIVER_ADDRESS);
+// //TMC2209Stepper driver(SW_RX, SW_TX, R_SENSE, DRIVER_ADDRESS);
+
+// void setup() {
+//     Serial.begin(115200);
+// //   pinMode(EN_PIN, OUTPUT);
+//   pinMode(STEP_PIN, OUTPUT);
+// //   pinMode(DIR_PIN, OUTPUT);
+// //   digitalWrite(EN_PIN, LOW);      // Enable driver in hardware
+
+//                                   // Enable one according to your setup
+// //SPI.begin();                    // SPI drivers
+// SERIAL_PORT.begin(115200);      // HW UART drivers
+// // driver.beginSerial(115200);     // SW UART drivers
+
+//   driver.begin();                 //  SPI: Init CS pins and possible SW SPI pins
+//                                   // UART: Init SW UART (if selected) with default 115200 baudrate
+//   driver.toff(5);                 // Enables driver in software
+//   driver.rms_current(1000);        // Set motor RMS current
+//   driver.microsteps(16);          // Set microsteps to 1/16th
+
+// // driver.en_pwm_mode(true);       // Toggle stealthChop on TMC2130/2160/5130/5160
+// // driver.en_spreadCycle(false);   // Toggle spreadCycle on TMC2208/2209/2224
+//   driver.pwm_autoscale(true);     // Needed for stealthChop
+// }
+
+// bool shaft = false;
+
+// void loop() {
+//   // Run 5000 steps and switch direction in software
+//   for (uint16_t i = 1000; i>0; i--) {
+//     digitalWrite(STEP_PIN, HIGH);
+//     delayMicroseconds(160);
+//     digitalWrite(STEP_PIN, LOW);
+//     delayMicroseconds(160);
+//   }
+//   shaft = !shaft;
+//   driver.shaft(shaft);
+//   Serial.println(shaft);
+// }
+
+/**
+ * Author Teemu Mäntykallio
+ * Initializes the library and runs the stepper
+ * motor in alternating directions.
+ * les connexions
+ *  TMC2209   ESP32
+ * STEP_PIN  GPIO4
+ * TX        GPIO17 (Serial2 TX)
+ * EN        GND
+ */
+
+// #include <TMCStepper.h>
+// // #include <AccelStepper.h>
+
+// #define STEP_PIN GPIO_NUM_4 // Step
+// #define SERIAL_PORT Serial2 // TMC2208/TMC2224 HardwareSerial port
+// #define DRIVER_ADDRESS 0b00 // TMC2209 Driver address according to MS1 and MS2
+
+// #define R_SENSE 0.11f
+
+// TMC2209Stepper driver(&SERIAL_PORT, R_SENSE, DRIVER_ADDRESS);
+// // AccelStepper stepper(AccelStepper::DRIVER, STEP_PIN, GPIO_NUM_5);
 // void setup()
 // {
 //     Serial.begin(115200);
-//     driver.begin();                                    // begin driver
-//     driver.toff(4);                                    // set driver toff
-//     driver.blank_time(24);                             // set driver blank time (time between two chopper off times)
-//     driver.rms_current(RMS_CURRENT);                   // set driver RMS current
-//     driver.microsteps(1 << MICROSTEP_POWER_OF_2);      // set driver microsteps
+//     pinMode(STEP_PIN, OUTPUT);
+//     // SERIAL_PORT.begin(115200);
 
-//     motor.setMaxSpeed(100 * MICRO_STEPS_PER_MM);
-//     motor.setAcceleration(1 * MICRO_STEPS_PER_MM);
-//     motor.enableOutputs();
-//     motor.moveTo(100 * MICRO_STEPS_PER_MM);
-//     Serial.println("MICRO_STEPS_PER_MM");
-//     Serial.println(MICRO_STEPS_PER_MM);
+//     driver.begin();
 
+//     driver.toff(5);
+//     driver.pdn_disable(true);
+//     driver.rms_current(400);
+//     driver.microsteps(16);
+//     // driver.pwm_autoscale(false);
+
+//     // driver.pwm_autoscale(true);
+//     // driver.shaft(true);
+//     // disable cool
+//     // driver.COOLCONF(0);
+
+//     // driver.begin();
+//     // driver.toff(4);
+//     // driver.blank_time(24);
+//     // driver.rms_current(400); // mA
+//     // driver.microsteps(16);
+//     // driver.TCOOLTHRS(0xFFFFF); // 20bit max
+//     // driver.semin(5);
+//     // driver.semax(2);
+//     // driver.sedn(0b01); // set the
+//     // driver.SGTHRS(STALL_VALUE);
+
+//     // gconf pdn_uart=1
+//     // driver.pdn_disable(1);
+//     // stepper.setAcceleration(1000);
+//     // stepper.setSpeed(10000);
+//     // stepper.enableOutputs();
 // }
 
-// unsigned long lastTime = 0;
+// bool shaft = false, step_state = false;
+// unsigned long t0 = 0, t1 = 0;
+
 // void loop()
 // {
-//     motor.run();
-//     if (motor.distanceToGo() == 0)
+//     for (uint16_t i = 1000; i > 0; i--)
 //     {
-//         motor.moveTo(-motor.currentPosition());
+//         digitalWrite(STEP_PIN, HIGH);
+//         delayMicroseconds(300);
+//         digitalWrite(STEP_PIN, LOW);
+//         delayMicroseconds(300);
 //     }
+//     // stepper.runSpeed();
+//     // stepper.run();
+//     // if (stepper.distanceToGo() == 0)
+//     // {
+//     //     stepper.moveTo(1000);
+//     // }
 
-//     if (millis() - lastTime > 1000)
-//     {
-//         lastTime = millis();
-//         Serial.print("Current position: ");
-//         Serial.print(motor.currentPosition() / MICRO_STEPS_PER_MM);
-//         Serial.print(" mm, \t");
-//         Serial.print("stallguard: ");
-//         Serial.println(driver.SG_RESULT());
-//     }
+//     driver.shaft(shaft);
+//     shaft = !shaft;
+
+//     // unsigned long t = esp_timer_get_time();
+
+//     // if (t - t0 > 250)
+//     // {
+//     //     t0 = t;
+//     //     digitalWrite(STEP_PIN, step_state ? HIGH : LOW);
+//     //     step_state = !step_state;
+//     //     // Serial.println(step_state);
+//     // }
+
+//     // if (t - t1 > 500000)
+//     // {
+//     //     t1 = t;
+//     //     driver.shaft(shaft);
+//     //     shaft = !shaft;
+//     //     Serial.println(driver.cs2rms(driver.cs_actual()), DEC);
+//     //     // Serial.println(shaft);
+//     // }
 // }
-
-#include <HardwareSerial.h>
-#include <TMCStepper.h>
-
-// #define DIAG_PIN_2         19          // STALL motor 2
-// #define EN_PIN_2           5          // Enable
-#define DIR_PIN_2 33          // Direction
-#define STEP_PIN_2 32         // Step
-#define SERIAL_PORT_2 Serial2 // TMC2208/TMC2224 HardwareSerial port
-#define DRIVER_ADDRESS_2 0b00 // TMC2209 Driver address according to MS1 and MS2
-#define R_SENSE_2 0.62f       // E_SENSE for current calc.
-#define STALL_VALUE_2 200       // [0..255]
-
-hw_timer_t *timer1 = NULL;
-TMC2209Stepper driver2(&SERIAL_PORT_2, R_SENSE_2, DRIVER_ADDRESS_2);
-
-void IRAM_ATTR onTimer()
-{
-
-    digitalWrite(STEP_PIN_2, !digitalRead(STEP_PIN_2));
-}
-
-void activate_interrupt()
-{
-    {
-        cli();                                        // stop interrupts
-        timer1 = timerBegin(3, 4, true);              // Initialize timer 4. Se configura el timer,  ESP(0,1,2,3)
-                                                      // prescaler of 8, y true es una bandera que indica si la interrupcion se realiza en borde o en nivel
-        timerAttachInterrupt(timer1, &onTimer, true); // link interrupt with function onTimer
-        timerAlarmWrite(timer1, 8000, true);           // En esta funcion se define el valor del contador en el cual se genera la interrupción del timer
-        timerAlarmEnable(timer1);                     // Enable timer
-        sei();                                        // allow interrupts
-    }
-}
-
-void setup()
-{
-    Serial.begin(115200); // Init serial port and set baudrate
-    while (!Serial)
-        ; // Wait for serial port to connect
-    Serial.println("\nStart...");
-    SERIAL_PORT_2.begin(115200);
-    delay(1000);
-
-    //   pinMode(DIAG_PIN_2 ,INPUT);
-    //   pinMode(EN_PIN_2 ,OUTPUT);
-    pinMode(STEP_PIN_2, OUTPUT);
-    pinMode(DIR_PIN_2, OUTPUT);
-
-    //   digitalWrite(EN_PIN_2 ,LOW);
-    digitalWrite(DIR_PIN_2, LOW);
-
-
-       driver2.begin();
-       driver2.toff(4);
-       driver2.blank_time(24);
-       driver2.rms_current(100); // mA
-       driver2.microsteps(16);
-       driver2.TCOOLTHRS(0xFFFFF); // 20bit max
-       driver2.semin(5);
-       driver2.semax(2);
-       driver2.sedn(0b01);
-       driver2.SGTHRS(STALL_VALUE_2);
-       activate_interrupt();
-}
-bool flag = false;
-void loop()
-{
-    static uint32_t last_time = 0;
-    uint32_t ms = millis();
-    if ((ms - last_time) > 100)
-    { // run every 0.1s
-        last_time = ms;
-
-        Serial.print("0 ");
-        Serial.print(driver2.SG_RESULT(), DEC);
-        Serial.print(" ");
-        Serial.println(driver2.cs2rms(driver2.cs_actual()), DEC);
-    }
-    if (ms > 10000 && !flag)
-    {
-        flag = true;
-        driver2.shaft(true);
-        driver2.SGTHRS(0);
-    }
-}

@@ -2,15 +2,18 @@
 
 void LinearActuator::setup()
 {
-    driver.begin();                                    // begin driver
-    driver.toff(4);                                    // set driver toff
-    driver.blank_time(24);                             // set driver blank time (time between two chopper off times)
-    driver.rms_current(RMS_CURRENT);                   // set driver RMS current
-    driver.microsteps(1 << MICROSTEP_POWER_OF_2);      // set driver microsteps
-    driver.TCOOLTHRS(0xFFFFF);                         
+    // driver.setMicrostepsPerStepPowerOfTwo(MICROSTEP_POWER_OF_2);
+    // driver.setRunCurrent(RMS_CURRENT);
+    // driver.setStallGuardThreshold(STALL_VALUE);
     setMaxSpeed(LINEAR_ACTUATOR_MAX_SPEED);            // set max speed
     setAcceleration(LINEAR_ACTUATOR_MAX_ACCELERATION); // set acceleration
-    motor.enableOutputs();                             // enable motor outputs
+    // motor.enableOutputs();                             // enable motor outputs
+    // driver.enable();
+    // driver.enableAutomaticCurrentScaling();
+    driver.setRunCurrent(RMS_CURRENT);
+    driver.setStallGuardThreshold(STALL_VALUE);
+    driver.setMicrostepsPerStepPowerOfTwo(MICROSTEP_POWER_OF_2);
+    driver.enable();
 }
 
 bool LinearActuator::calibrateRight()
@@ -53,7 +56,7 @@ void LinearActuator::instantStop()
 int LinearActuator::run()
 {
     motor.run();
-    if (driver.SG_RESULT() > STALL_VALUE)
+    if (driver.getStallGuardResult() > STALL_VALUE)
     {
         instantStop();
         return RunStatus::COLLISION;
