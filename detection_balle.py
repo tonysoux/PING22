@@ -137,13 +137,13 @@ cap1 = cv2.VideoCapture(video_path)
 
 if not cap1.isOpened():
     print("Erreur : Impossible de lire la vidéo.")
-    log("Impossible de lire la vidéo.", "Erreur")
+    log("Impossible de lire la video.", "Erreur")
     exit()
 
-if not cap1.isOpened():
+""" if not cap1.isOpened():
     print("Erreur : Impossible de lire la vidéo.")
-    log("Impossible de lire la vidéo.", "Erreur")
-    exit()
+    log("Impossible de lire la video.", "Erreur")
+    exit() """
 
 
 """ #Récupérer les propriétés de la vidéo
