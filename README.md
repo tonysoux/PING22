@@ -31,9 +31,9 @@ Pour la première installation, écrasez le contenu de la carte microSD du Raspb
 
 ## Contribution
 
-### Pour les contributeurs externes
+### Pour les contributeurs du projet
 
-PING² est un dépôt public, et toute personne souhaitant contribuer est la bienvenue ! Voici comment vous pouvez participer :
+Voici comment vous pouvez participer :
 
 1. **Forker le dépôt** : Cliquez sur "Fork" en haut de cette page pour créer une copie de ce dépôt sur votre compte.
 2. **Cloner votre fork** : Clonez votre fork sur votre machine avec la commande suivante :
