@@ -129,8 +129,8 @@ def detect_ball(roi):
     return None
 
 # Chargement de la vidéo
-video_path = 'video/video_camera_2.0.mp4'
-#video_path_2 = 'video/video_camera_2.0.mp4'
+video_path = 'config/video/video_camera_2.0.mp4'
+#video_path_2 = 'config/video/video_camera_2.0.mp4'
 cap1 = cv2.VideoCapture(video_path)
 #cap2 = cv2.VideoCapture(video_path_2)
 
