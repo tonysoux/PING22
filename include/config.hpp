@@ -26,6 +26,8 @@
 
 #define ANTI_NOISE_THRESHOLD 5
 
+#define NB_MODES 8
+
 // output
 #define STATUS_LED 3
 

@@ -82,30 +82,44 @@ private:
             send(LIGHT_KEY, VALUE_ACTION_KEY, inputs.light);
             lastInputs.light = inputs.light;
         }
-
+        if (inputs.mode_a != lastInputs.mode_a || inputs.mode_b != lastInputs.mode_b)
+            {
+                if (inputs.mode_a != inputs.mode_b) 
+                {
+                    
+                    if (inputs.mode_a)
+                    {
+                        inputs.mode++;
+                        send(MODE_KEY, INCREMENT_ACTION_KEY, inputs.mode);
+                    }
+                    else
+                    {
+                        inputs.mode--;
+                        send(MODE_KEY, DECREMENT_ACTION_KEY, inputs.mode);
+                    }
+                }
         if (inputs.mode_pb != lastInputs.mode_pb)
         {
-            if (inputs.mode_pb)
-                send(MODE_PB_KEY, PUSH_ACTION_KEY);
-            else
-                send(MODE_PB_KEY, RELEASE_ACTION_KEY);
-        }
-        
-        if (inputs.mode_a != lastInputs.mode_a)
+        if (inputs.mode_pb)
         {
-            if (!inputs.mode_a)
-                if (!inputs.mode_b)
-                    send(MODE_KEY, INCREMENT_ACTION_KEY);
+           
+            send(MODE_PB_KEY, PUSH_ACTION_KEY, inputs.mode);
         }
-        
-        if (inputs.mode_b != lastInputs.mode_b)
+        else
         {
-            if (!inputs.mode_b)
-                    if (!inputs.mode_a)
+            send(MODE_PB_KEY, RELEASE_ACTION_KEY);
+        }
+        lastInputs.mode_pb = inputs.mode_pb;
+    }
 
-                        send(MODE_KEY, DECREMENT_ACTION_KEY);
-        }
-        
+
+        //limiter les modes dans une plage de 0 à NB_MODES
+        if (inputs.mode < 0)
+            inputs.mode = 0;
+        if (inputs.mode > NB_MODES)
+            inputs.mode = NB_MODES;
+
+
         if (inputs.reset != lastInputs.reset)
         {
             if (inputs.reset)
@@ -114,6 +128,7 @@ private:
                 send(RESET, RELEASE_ACTION_KEY);
         }
         lastInputs.refresh(inputs);
+    
     }
 
     template <typename T>
