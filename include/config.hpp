@@ -1,5 +1,7 @@
 #include <Arduino.h>
 
+#pragma once    
+
 // input
 #define VOLUME_PIN A3
 #define LEVEL_PIN A2
@@ -25,7 +27,7 @@
 #define DECREMENT_ACTION_KEY "decrement"
 
 #define ANTI_NOISE_THRESHOLD 5
-
+#define DEBOUNCE_DELAY 50
 #define NB_MODES 8
 
 // output

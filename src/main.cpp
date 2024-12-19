@@ -5,11 +5,11 @@ Corner corner;
 void setup() {
   Serial.begin(115200);
   Serial.println("Hello World");
-  corner.setup();
+  corner.setup_corner();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  corner.loop();
+  corner.loop_corner();
   delay(50);
 }
